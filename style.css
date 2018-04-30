@@ -1,0 +1,51 @@
+body, html {
+    width: 100vw;
+}
+p {
+    font-size:12px;
+}
+.display {
+    border:1px solid #ccc;
+    width:206px;
+    background:black;
+}
+.calculator {
+    padding:10px;
+}
+.numbers {
+    width:35px;
+}
+.operation {
+    width:35px;
+}
+.clear {
+    width:35px;
+    background-color:green;
+    color:white;
+}
+.equals {
+    margin-top: 2px;
+    width:190px;
+    background-color:rgb(162, 173, 2);
+    color:white;
+}
+.output {
+    background:black;
+    color:lime;
+    font-family:"Calculator", Courier;
+    padding:0 10px;
+    text-align:right;
+    font-size:18px;
+    margin-left: 11.5px;
+    overflow-x: hidden;
+}
+.calcbody {
+    margin: 0 auto;
+    margin-top: 50px;
+    background:rgb(118, 116, 119);
+    width:220px;
+    padding:10px;
+    box-shadow: 5px 5px 5px #888888;
+    border:1px solid rgb(0, 0, 0);
+    /* border-radius:12px; */
+}

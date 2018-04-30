@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="calcApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body ng-cloak ng-controller="CalcCtrl">
+    <div class="calcbody">
+        <div class="display">
+            <p class="output">{{display}} {{operationSign}}</p>
+        </div>
+        <div class="calculator">
+            <button ng-click='clearHistory()'>&lt M</button>
+            <button class="numbers" ng-click='updateDisplay(1)'>1</button>
+            <button class="numbers" ng-click='updateDisplay(2)'>2</button>
+            <button class="numbers" ng-click='updateDisplay(3)'>3</button>
+            <button class="operation" ng-click='divide()'>÷</button>
+            <br>
+            <button ng-click='correctIt()'>&lt-X</button>
+            <button class="numbers" ng-click='updateDisplay(4)'>4</button>
+            <button class="numbers" ng-click='updateDisplay(5)'>5</button>
+            <button class="numbers" ng-click='updateDisplay(6)'>6</button>
+            <button class="operation" ng-click='multi()'>*</button>
+            <br>
+            <button class="operation" ng-click='exp()'>X<sup>y</sup></button>
+            <button class="numbers" ng-click='updateDisplay(7)'>7</button>
+            <button class="numbers" ng-click='updateDisplay(8)'>8</button>
+            <button class="numbers" ng-click='updateDisplay(9)'>9</button>
+            <button class="operation" ng-click='subtract()'>-</button>
+            <br>
+            <button class="operation" ng-click='sqrt()'>√</button>
+            <button class="numbers" ng-click='updateDisplay(0)'>0</button>
+            <button class="numbers" ng-click='updateDisplay(".")'>.</button>
+            <button class="clear" ng-click='clr()'>CLR</button>
+            <button class="operation" ng-click='add()'>+</button>
+            <br>
+            <button class="equals" ng-click='equals()'>=</button>
+            <br><br>
+            Results: <select ng-change="selectRes(selres)" ng-model="selres" ng-options="item for item in history"><option>--</option></select>
+            <p ng-if="runningTotal"> ANS: {{runningTotal}}</p>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<script src="app.js"></script>
+</html>
