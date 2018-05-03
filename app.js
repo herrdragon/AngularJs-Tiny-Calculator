@@ -36,17 +36,11 @@ angular.module('calcApp', [])
     const EXP_SIGN = "ex";
     const SQRT_SIGN = "√";
 
-    
-    var h = location.hash;
-    console.log(localStorage);
     if (!location.hash)
-        h = location.hash = makeRand();
-    for(var i =0; i < localStorage.length; i++){
-        if (localStorage.key(i) == location.hash && localStorage.getItem(localStorage.key(i)) != "")
-            $scope.history = JSON.parse(localStorage.getItem(h)); 
-     }      
-    if (!localStorage.h)
-        localStorage.setItem(location.hash, JSON.stringify($scope.history));
+        location.hash = makeRand();
+    if (sessionStorage.getItem(sessionStorage.key(location.hash)) != "")
+        $scope.history = JSON.parse(sessionStorage.getItem(location.hash)); 
+    sessionStorage.setItem(location.hash, JSON.stringify($scope.history));
     
     // Runs every time a number button is clicked.
     // Updates the display display and sets operand1 flag.
@@ -208,10 +202,11 @@ angular.module('calcApp', [])
 
     // Clears history .
     $scope.clearHistory = function () {
-        for(var i =0; i < localStorage.length; i++){
-            if (localStorage.key(i) == location.hash)
-                localStorage.setItem(localStorage.key(i), "");
-        } 
+        // for(var i =0; i < sessionStorage.length; i++){
+        //     if (sessionStorage.key(i) == location.hash)
+        //         sessionStorage.setItem(sessionStorage.key(i), "");
+        // }
+        sessionStorage.setItem(sessionStorage.key(location.hash), "");
         $scope.history = [];
     };
 
@@ -233,7 +228,7 @@ angular.module('calcApp', [])
             if ($scope.history.length >= 10)
                 $scope.history.shift();
         $scope.history.push(item);
-        localStorage.setItem(location.hash, JSON.stringify($scope.history));
+        sessionStorage.setItem(location.hash, JSON.stringify($scope.history));
     }
     
     function makeRand() {
