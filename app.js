@@ -36,10 +36,18 @@ angular.module('calcApp', [])
     const EXP_SIGN = "ex";
     const SQRT_SIGN = "√";
 
-    if (localStorage.history != "") {
-        $scope.history = JSON.parse(localStorage.getItem("history"));
-    }
-
+    
+    var h = location.hash;
+    console.log(localStorage);
+    if (!location.hash)
+        h = location.hash = makeRand();
+    for(var i =0; i < localStorage.length; i++){
+        if (localStorage.key(i) == location.hash && localStorage.getItem(localStorage.key(i)) != "")
+            $scope.history = JSON.parse(localStorage.getItem(h)); 
+     }      
+    if (!localStorage.h)
+        localStorage.setItem(location.hash, JSON.stringify($scope.history));
+    
     // Runs every time a number button is clicked.
     // Updates the display display and sets operand1 flag.
     $scope.updateDisplay = function (number) {
@@ -200,7 +208,10 @@ angular.module('calcApp', [])
 
     // Clears history .
     $scope.clearHistory = function () {
-        localStorage.history = "";
+        for(var i =0; i < localStorage.length; i++){
+            if (localStorage.key(i) == location.hash)
+                localStorage.setItem(localStorage.key(i), "");
+        } 
         $scope.history = [];
     };
 
@@ -222,8 +233,14 @@ angular.module('calcApp', [])
             if ($scope.history.length >= 10)
                 $scope.history.shift();
         $scope.history.push(item);
-        localStorage.setItem("history", JSON.stringify($scope.history));
-        console.log("local", localStorage.history);
-        console.log("history", $scope.history);
+        localStorage.setItem(location.hash, JSON.stringify($scope.history));
     }
+    
+    function makeRand() {
+        var rand = "";
+        var seed = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (var i = 0; i < 5; i++)
+          rand += seed.charAt(Math.floor(Math.random() * seed.length));
+        return rand;
+      }
 });
