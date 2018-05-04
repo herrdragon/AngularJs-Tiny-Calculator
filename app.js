@@ -38,8 +38,10 @@ angular.module('calcApp', [])
 
     if (!location.hash)
         location.hash = makeRand();
-    if (sessionStorage.getItem(sessionStorage.key(location.hash)) != "")
-        $scope.history = JSON.parse(sessionStorage.getItem(location.hash)); 
+    for(var i =0; i < sessionStorage.length; i++){
+        if (sessionStorage.key(i) == location.hash && sessionStorage.getItem(sessionStorage.key(i)) != "")
+            $scope.history = JSON.parse(sessionStorage.getItem(location.hash)); 
+    }
     sessionStorage.setItem(location.hash, JSON.stringify($scope.history));
     
     // Runs every time a number button is clicked.
@@ -200,20 +202,15 @@ angular.module('calcApp', [])
         $scope.save = true;
     };
 
-    // Clears history .
+    // Clears history.
     $scope.clearHistory = function () {
-        // for(var i =0; i < sessionStorage.length; i++){
-        //     if (sessionStorage.key(i) == location.hash)
-        //         sessionStorage.setItem(sessionStorage.key(i), "");
-        // }
         sessionStorage.setItem(sessionStorage.key(location.hash), "");
         $scope.history = [];
     };
 
-    // Clears history .
+    // Display selected result.
     $scope.selectRes = function (result) {
         $scope.updateDisplay(result);
-        // $scope.pendingValue = $scope.display;
     };
 
     // Updates the display and resets the operand1 flag.
@@ -222,7 +219,7 @@ angular.module('calcApp', [])
         $scope.operand1 = true;
     };
 
-    // Save history result
+    // Save history result.
     q = function (item) {
         if ($scope.history != null)
             if ($scope.history.length >= 10)
