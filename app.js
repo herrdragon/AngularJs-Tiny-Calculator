@@ -215,7 +215,7 @@ angular.module('calcApp', [])
 
     // Updates the display and resets the operand1 flag.
     setdisplay = function (displayString) {
-        $scope.display = displayString;
+        $scope.display = parseFloat(displayString);
         $scope.operand1 = true;
     };
 
